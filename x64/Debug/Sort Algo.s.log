@@ -1,0 +1,3 @@
+﻿  Sort Algo.s.cpp
+C:\Users\Acer\Desktop\visual studio\Sort Algo.s\Sort Algo.s.cpp(12,23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Sort Algo.s.vcxproj -> C:\Users\Acer\Desktop\visual studio\Sort Algo.s\x64\Debug\Sort Algo.s.exe
