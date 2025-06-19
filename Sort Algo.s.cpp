@@ -77,6 +77,7 @@ void mergeSort(vector<int>& arr, int left, int right)
     merge(arr, left, mid, right);
 }
 
+//recursive
 int partition(vector<int>& arr, int low, int high) {
 
     int pivot = arr[high];
@@ -104,6 +105,48 @@ void quickSort(vector<int>& arr, int low, int high) {
     }
 }
 
+//iterative
+int partition2(int arr[], int l, int h)
+{
+    int x = arr[h];
+    int i = (l - 1);
+
+    for (int j = l; j <= h - 1; j++) {
+        if (arr[j] <= x) {
+            i++;
+            swap(arr[i], arr[j]);
+        }
+    }
+    swap(arr[i + 1], arr[h]);
+    return (i + 1);
+} 
+
+void quickSortIterative(int arr[], int l, int h)
+{
+    vector<int> stack(h - l + 1);
+    int top = -1;
+
+    stack[++top] = l;
+    stack[++top] = h;
+
+    while (top >= 0) {
+        h = stack[top--];
+        l = stack[top--];
+
+        int p = partition2(arr, l, h);
+
+        if (p - 1 > l) {
+            stack[++top] = l;
+            stack[++top] = p - 1;
+        }
+
+        if (p + 1 < h) {
+            stack[++top] = p + 1;
+            stack[++top] = h;
+        }
+    }
+}
+
 void printVector(const vector<int>& arr) {
     for (int num : arr)
         cout << " " << num;
@@ -119,14 +162,19 @@ vector<int> generateRandomArray(int size) {
 int main()
 {
     //srand(time(0));
-    int size= 100;
-    vector<int> arr = generateRandomArray(size);
-    //vector<int> arr = {  };
-    //int size = arr.size(); //O(1)
+    //int size= 50000; 
+    //vector<int> arr = generateRandomArray(size);
+
+    vector<int> arr = { };
+    int size = arr.size(); //O(1)
+
     auto start = high_resolution_clock::now();
     //bubbleSort(arr);
     //mergeSort(arr, 0, size - 1);
     //quickSort(arr, 0, size - 1);
+    //int n = arr.size();
+    //quickSortIterative(arr.data(), 0, size - 1);
+
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<milliseconds>(end - start); 
     cout << "Alg. name - Sort || test #1: " << duration.count() << " ms " << endl;
